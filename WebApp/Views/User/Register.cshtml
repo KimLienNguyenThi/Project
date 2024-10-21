@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Đăng ký tài khoản</h1>
+
+        <h1 class="text-lg-center mt-3">Đăng ký tài khoản</h1>
+ 
 
 <hr />
 <div class="row justify-content-center" >
@@ -32,12 +34,11 @@
                 <input id="email" asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div>
-                <button onclick="Register()" type="button" class="btn btn-primary">Đăng ký</button>
+            <div class="row justify-content-center">
+                <a asp-action="Index" class="col-6">Quay về</a>
+                <button onclick="Register()" type="button" class=" col-6 btn btn-primary mt-2"  >Đăng ký</button>
             </div>
-            <div>
-                <a asp-action="Index">Quay về</a>
-            </div>
+        
         </form>
     </div>
 
