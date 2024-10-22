@@ -52,7 +52,7 @@ else
                             <input id="soLuongHienTai_@item.MaSach" value="@item.SoLuongHientai" hidden>
                         </div>
                         <div class="col-2 text-center" style="margin-bottom: 80px">
-                            <input id="soLuongSachMuon_@item.MaSach" type="number" min="0" max="2" value="@ListSachMuon.listSachMuon[item.MaSach]" class="form-control sach-input" onkeydown="validateInput(event, 2)">
+                            <input id="soLuongSachMuon_@item.MaSach" type="number" min="1" max="2" value="@ListSachMuon.listSachMuon[item.MaSach]" class="form-control sach-input" onkeydown="validateInput(event, 2)">
                         </div>
                         <div class="col-1" style="margin-bottom: 80px">
                             <button class="btn btn-danger" onclick="XoaSach(@item.MaSach)">Xóa</button>
@@ -359,7 +359,7 @@ else
                 console.log("Mảng số lượng sách mượn: " + giaTri);
 
                 // Kiểm tra số lượng sách mượn
-                if (tongSoLuongSach < 5) {
+                if (tongSoLuongSach <= 5) {
 
 
                     // Gọi controller xử lý mượn sách

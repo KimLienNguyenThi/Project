@@ -45,6 +45,10 @@ namespace WebApp.Controllers
         [HttpPost]
         public IActionResult SearchBook(string tenSach)
         {
+            if (tenSach == null)
+            {
+                tenSach = "null";
+            }
 
             List<SachDTO> bookList = new List<SachDTO>();
             HttpResponseMessage response = _client.GetAsync(_client.BaseAddress + $"/Book/GetBookByName/{tenSach}").Result;
@@ -52,11 +56,19 @@ namespace WebApp.Controllers
             if (response.IsSuccessStatusCode)
             {
                 string data = response.Content.ReadAsStringAsync().Result;
-                var responseObject = JsonConvert.DeserializeObject<dynamic>(data);
-                bookList = responseObject.sachList.ToObject<List<SachDTO>>();
+                //var responseObject = JsonConvert.DeserializeObject<dynamic>(data);
+                //bookList = responseObject.sachList.ToObject<List<SachDTO>>();
+                bookList = JsonConvert.DeserializeObject<List<SachDTO>>(data);
+
+                return Json(new { success = true, sachList = bookList });
+            }
+            else
+            {
+                string message = response.Content.ReadAsStringAsync().Result;
+
+                return Json(new { success = false, message = message });
             }
 
-            return Ok(new { success = true, sachList = bookList });
         }
 
 

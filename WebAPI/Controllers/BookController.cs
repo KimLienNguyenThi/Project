@@ -51,34 +51,34 @@ namespace WebAPI.Controllers
         {
             try
             {
-               
-                if (string.IsNullOrEmpty(tenSach))
+
+                if (tenSach.Equals("null"))
                 {
-                    return BadRequest(new { success = false, message = "Tên sách không được để trống." });
+                    var allBook = _context.Saches.Include(x => x.TtSaches).ToList();
+
+                    List<SachDTO> listSach = _mapper.Map<List<SachDTO>>(allBook);
+                    return Ok(listSach);
                 }
-                
+
                 var sachLoc = _context.Saches.Include(x => x.TtSaches).Where(item =>
                     item.TenSach.Contains(tenSach) ||
-                    item.TheLoai.Contains(tenSach) ||
-                    item.TacGia.Contains(tenSach) ||
-                    item.NgonNgu.Contains(tenSach) ||
-                    item.Nxb.Contains(tenSach)
+                    item.TacGia.Contains(tenSach)
                 ).ToList();
 
                 List<SachDTO> sachDtos = _mapper.Map<List<SachDTO>>(sachLoc);
 
                 if (sachDtos.Any())
                 {
-                    return Ok(new { success = true, sachList = sachDtos });
+                    return Ok(sachDtos);
                 }
                 else
                 {
-                    return NotFound(new { success = false, message = "Không tìm thấy sách nào phù hợp." });
+                    return NotFound("Không tìm thấy sách nào phù hợp.");
                 }
             }
             catch (Exception)
             {
-                return StatusCode(500, new { success = false, message = "Đã xảy ra lỗi khi tìm kiếm sách." });
+                return StatusCode(500, "Đã xảy ra lỗi khi tìm kiếm sách.");
             }
         }
 
