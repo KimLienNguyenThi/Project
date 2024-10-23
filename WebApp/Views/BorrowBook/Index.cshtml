@@ -24,7 +24,7 @@
                     <div class="col-md-auto mb-3" style="width: 40%;">
                         <div class="input-group">
                             <input id="searchInput" type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
-                            <button class="btn btn-dark border-0 py-3" onclick="TimKiem()">Tìm kiếm</button>
+                            <button class="btn btn-dark border-0 py-3" onclick="TimKiem()" name="Search">Tìm kiếm</button>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             <!-- Script to generate years dynamically -->
                             <script>
                                 var currentYear = new Date().getFullYear();
-                                for (var i = currentYear; i >= 1940; i--) {
+                                for (var i = currentYear; i >= 2000; i--) {
                                     document.write('<option value="' + i + '">' + i + '</option>');
                                 }
                             </script>
@@ -72,7 +72,7 @@
                     </div>
                     <!-- Filter Button -->
                     <div class="col-md-3 align-self-end">
-                        <button class="btn btn-dark border-0 w-100 py-3" onclick="LocSach()">Lọc</button>
+                        <button class="btn btn-dark border-0 w-100 py-3" onclick="LocSach()" id="filter">Lọc</button>
                     </div>
                 </div>
 
