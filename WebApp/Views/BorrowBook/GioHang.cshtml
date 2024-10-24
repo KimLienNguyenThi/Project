@@ -120,22 +120,25 @@ else
         if (!isNumericInput(event)) {
             event.preventDefault();
         }
-        // Ngăn chặn nhập 'e' hoặc 'E'
+
+        // Ngăn chặn nhập 'e', 'E', và các ký tự khác không hợp lệ
         if (event.key === 'e' || event.key === 'E') {
             event.preventDefault();
         }
-        // Kiểm tra giá trị sau khi nhập để đảm bảo nó nằm trong phạm vi cho phép
+
+        // Kiểm tra giá trị sau khi nhập để đảm bảo nó chỉ là '1' hoặc '2'
         let inputValue = event.target.value + event.key;
-        if (inputValue < 0 || inputValue > maxQuantity) {
+        if (inputValue !== '1' && inputValue !== '2') {
             event.preventDefault();
         }
     }
 
     function isNumericInput(event) {
         const key = event.key;
-        // Chỉ cho phép các phím số từ '0' đến '2', phím Backspace, Delete và các phím mũi tên
-        return (key >= '0' && key <= '2') || key === 'Backspace' || key === 'Delete' || key === 'ArrowLeft' || key === 'ArrowRight';
+        // Chỉ cho phép nhập phím '1' hoặc '2', không cho phép các phím xóa (Backspace, Delete)
+        return key === '1' || key === '2';
     }
+
     // Mảng lưu giá trị của các checkbox_Sach được chọn
     var selectedValues = [];
 
@@ -287,12 +290,12 @@ else
                     console.log("Số lượng chọn: " + parseInt(inputElement.value));
 
                     // Kiểm tra xem giá trị có âm không và đặt lại thành 0 nếu cần
-                    if (parseInt(inputElement.value) > 1 && parseInt(inputElement.value) <= parseInt(SoLuongHienTai.value)) {
+                    if (parseInt(inputElement.value) >= 1 && parseInt(inputElement.value) <= 2) {
                         // Lấy giá trị của thuộc tính value
                         var giaTri = parseInt(inputElement.value);
                         tongSoSachMuon = tongSoSachMuon + giaTri;
                     } else {
-                        inputElement.value = 0;
+                        inputElement.value = 1;
                         document.getElementById("contentModalError").innerHTML = "Vui lòng chọn giá trị hợp lệ";
                         $("#ModalError").modal("show");
                     }
